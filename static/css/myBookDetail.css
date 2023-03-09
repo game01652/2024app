@@ -1,0 +1,145 @@
+﻿/* 検索フィールド */
+.content {
+    font-size: 20px;
+    justify-content: center;
+    width: 100%;
+    z-index: 100;    /* 最前面に表示 */
+    display: flex;
+    margin : 230px 0px 200px 0px;    /* 周りの余白（順に上、右、下、左） */
+}
+
+/* ログインフォーム */
+.newBook {
+    background-color: rgba(231, 231, 231, 0.9);    /* 背景色 */
+    text-align: center;    /* 中央揃え */
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+}
+
+
+/* ヘッドライン */
+.headline {
+    color: rgb(187, 87, 87);    /* 文字色 */
+    text-shadow:0 5px 5px black;    /* 文字の影 */
+    font-weight: bold;    /* 文字の太さ */
+    font-size: 40px;    /* 文字の大きさ */
+    text-align: center;    /* 中央揃え */
+    position: absolute;    /* 絶対配置 */
+    top: 0.1%;    /* 上からの位置 */
+    left: 50%;    /* 左からの位置 */
+    transform: translate(-50%, -50%);    /* 水平方向や垂直方向で再配置 */
+    z-index: 1;    /* 最前面に表示 */
+}
+
+
+/* 検索フォーム */
+.single{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 80%;
+    height: 30px;
+}
+
+.single:focus {
+    background-color: hsl(73, 56%, 88%); /*--背景色--*/
+    outline: none;           /* ※ブラウザが標準で付加する線を消したいとき */
+}
+
+/* 複数行入力フォーム */
+.multi {
+	width: 80%; /*--幅--*/
+	height: 140px; /*--高さ--*/
+	border: solid 2px #e1e3e8; /*--ボーダー線--*/
+    resize: none;
+}
+
+.multi:focus {
+    background-color: hsl(73, 56%, 88%); /*--背景色--*/
+}
+
+
+.img-flex{
+    display: flex;
+    text-align: center;    /* 中央揃え */
+    justify-content: center;
+}
+
+
+/* 書籍の表紙画像フィールド */
+.card-img img{
+    width:100px;    /* 横幅 */
+    height:150px;    /* 高さ */
+    margin:0px 20px 0px 0px;    /* 周りの余白（上・右・下・左） */
+}
+
+
+
+/* 検索ボタン */
+.button{
+    background-color: green;    /* ボタンの背景色 */
+    border-radius: 50px;    /* 角丸 */
+    position: relative;    /* 相対位置 */
+    width: 150px;    /* 横幅 */
+    height: 30px;    /* 高さ */
+    color: white;    /* 文字の色 */
+    font-weight: bold;    /* 文字の太さ */
+    font-size: 15px;    /* 文字の大きさ */
+    border: none;    /* 枠線なし */
+    cursor: pointer;    /* マウスポインターの表示 */
+    box-shadow: 10px 10px 10px rgba(101, 98, 98, 0.945);    /* ぼかし */
+}
+
+
+ul {
+    padding: 0 0.5em;
+    position: relative;
+}
+  
+ul li {
+    line-height: 1.5;
+    padding: 0.5em 0 0.5em 0.5em;
+    border-bottom: dashed 2px white;
+}
+
+ul li p {
+    padding-left: 20px
+}
+
+
+/* セレクトボックス */
+.selectbox-001 select {
+    width: 80%;
+    height: 30px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.selectbox-001 select:focus {
+    background-color: hsl(73, 56%, 88%);
+}
+
+
+/* 数値の入力欄にスピナーを常時表示する */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+input[type=number]{
+    width: 80%;
+    height: 30px;
+}
+
+input[type=number]:focus{
+    background-color: hsl(73, 56%, 88%);
+}
+
+
+/* 書籍情報の各項目 */
+.index{
+    font-weight: bold;    /* 文字の太さ */
+    font-size: 15px;    /* 文字の大きさ */
+    color:red;    /* 文字の色 */
+}

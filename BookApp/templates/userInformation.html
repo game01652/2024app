@@ -1,0 +1,32 @@
+<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}User Information{% endblock %}
+
+{% block css %}
+<!-- Style -->
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/userInformation.css' %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:userInformation' %}"><p class="headline">USER INFORMATION</p></a>
+
+
+<div class="content">
+    <!-- 検索フォーム -->
+    <div class="user">
+        <ul>
+            <li><span class="index">Username</span><p>{{ obj.username }}</p></li>
+            <li><span class="index">Email</span><p>{{ obj.email }}</p></li>
+            <li><span class="index">Firstname</span><p>{{ obj.first_name }}</p></li>
+            <li><span class="index">Lastname</span><p>{{ obj.last_name }}</p></li>
+        </ul>
+        <p><a class="link_detail" href="{% url 'BookApp:userUpdate' %}">Update</a></p>    
+    </div>
+</div>
+{% endblock %}

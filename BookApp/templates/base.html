@@ -1,0 +1,94 @@
+﻿<!-- Copyright 2022 Kokai Sakaguchi -->
+<!-- ベーステンプレート -->
+
+<!DOCTYPE html>
+
+<!-- 言語を日本語に設定 -->
+<html lang="ja">
+    <!-- Header -->
+    <head>
+        <!-- 文字コードをutf-8に設定 -->
+        <meta charset="utf-8">
+        <!-- Title -->
+        <title>{% block title %}{% endblock %}</title>
+
+        <!-- Style -->
+        <!-- CSSファイルの読み込み -->
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+        {% block css %}{% endblock %}
+    </head>
+
+    <!-- Body -->
+    <body>
+        <div class="gnavi__wrap">
+            <div class="gnavi__list">
+                <a href="{% url 'BookApp:myBook' %}">My Book</a>
+            </div>
+            <div class="gnavi__list">
+                <a href="#">Register Book</a>
+                <div class="dropdown__lists">
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:bookSearch' %}">By API</a>
+                    </div>
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:newBook' %}">By Empty</a>
+                    </div>
+                </div>
+            </div>
+            <div class="gnavi__list">
+                <a href="#">Create</a>
+                <div class="dropdown__lists">
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:allContent' %}">All Contents</a>
+                    </div>
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:contentCreate' 'stage-create' %}">Create Stage</a>
+                    </div>
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:contentCreate' 'language-create' %}">Create Language</a>
+                    </div>
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:contentCreate' 'category-create' %}">Create Category</a>
+                    </div>
+                </div>
+            </div>
+            <div class="gnavi__list">
+                <a href="#">User</a>
+                <div class="dropdown__lists">
+                    {% if user.is_authenticated %}
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:userInformation' %}">User Information</a>
+                    </div>
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:logout' %}">Logout</a>
+                    </div>
+                    {% else %}
+                    <div class="dropdown__list">
+                        <a href="{% url 'BookApp:login' %}">Login</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="gnavi__list">
+                <a href="#">Other</a>
+            </div>
+
+        </div>
+
+        {% block content %}{% endblock %}
+
+        <footer id="footer">
+            <p>Book App</p>
+            <p>Kokai Sakaguchi Copyright (C) All Rights Reserved.</p>
+        </footer>
+
+        <!-- Script -->        
+        {% block js %}{% endblock %}
+    </body>
+</html>
+
+
+<!-- 参照ページ -->
+<!-- トップダウンメニュー -->
+<!-- https://www.asobou.co.jp/blog/web/css-dropdown -->

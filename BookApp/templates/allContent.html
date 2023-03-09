@@ -1,0 +1,48 @@
+<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}All Content{% endblock %}
+
+{% block css %}
+<!-- Style -->
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/allContent.css'  %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:allContent' %}"><p class="headline">ALL CONTENT</p></a>
+
+
+<div class="content">
+    <div class="content-list">
+        <p><a href="{% url 'BookApp:contentCreate' 'stage-create' %}" target="blank">Stage</a></p><br>
+        <ul>
+            {% for item in stage %}
+            <li>{{ item.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="content-list">
+        <p><a href="{% url 'BookApp:contentCreate' 'language-create' %}" target="blank">Language</a></p><br>
+        <ul>
+            {% for item in language %}
+            <li>{{ item.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="content-list">
+        <p><a href="{% url 'BookApp:contentCreate' 'category-create' %}" target="blank">Category</a></p><br>
+        <ul>
+            {% for item in category %}
+            <li>{{ item.title }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

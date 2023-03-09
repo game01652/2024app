@@ -1,0 +1,125 @@
+<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}Create Content{% endblock %}
+
+{% block css %}
+<!-- Style -->
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/contentCreate.css'  %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:contentCreate' 'stage-create' %}"><p class="headline">CREATE STAGE</p></a>
+
+
+<div class="content">
+    {% if flag == 'stage-create' %}
+    <form class="search_item" name="form1" action="{% url 'BookApp:contentCreate' 'stage-create' %}" method="POST" class="search_form" onsubmit="return check1()">
+    {% elif flag == 'language-create' %}
+    <form class="search_item" name="form1" action="{% url 'BookApp:contentCreate' 'language-create' %}" method="POST" class="search_form" onsubmit="return check1()">
+    {% elif flag == 'category-create' %}
+    <form class="search_item" name="form1" action="{% url 'BookApp:contentCreate' 'category-create' %}" method="POST" class="search_form" onsubmit="return check1()">
+    {% endif %}
+
+        {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+        <div class="gnavi__list2"><span class="index">TITLE</span>{{ form.title }}</div>
+
+        <button type="submit" name="submit" class="button">Register</button>
+    </form>
+
+
+    <div class="content-list">
+        {% if flag == 'stage-create' %}
+        <p>Stage List</p>
+        {% for item in obj %}
+        <ul>
+            <li>
+                <span class="index">{{ item.title }}</span>
+                <a href="{% url 'BookApp:contentDelete' item.id 'stage' %}" onclick="return check2()">Delete</a>
+                <form name="form3" action="{% url 'BookApp:contentUpdate' item.id 'stage' %}" method="POST" enctype="multipart/form-data" onSubmit="return check3()">
+                    {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+                    {{ form.title }}
+                    <button type="submit" name="submit">Update</button>
+                </form>
+            </li>
+        </ul>
+        {% endfor %}
+    
+        {% elif flag == 'language-create' %}
+        <p>Language List</p>
+        {% for item in obj %}
+        <ul>
+            <li>
+                <span class="index">{{ item.title }}</span>
+                <a href="{% url 'BookApp:contentDelete' item.id 'language' %}" onclick="return check2()">Delete</a>
+                <form name="form3" action="{% url 'BookApp:contentUpdate' item.id 'language' %}" method="POST" enctype="multipart/form-data" onSubmit="return check3()">
+                    {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+                    {{ form.title }}
+                    <button type="submit" name="submit">Update</button>
+                </form>
+            </li>
+        </ul>
+        {% endfor %}
+    
+        {% elif flag == 'category-create' %}
+        <p>Category List</p>
+        {% for item in obj %}
+        <ul>
+            <li>
+                <span class="index">{{ item.title }}</span>
+                <a href="{% url 'BookApp:contentDelete' item.id 'category' %}" onclick="return check2()">Delete</a>
+                <form name="form3" action="{% url 'BookApp:contentUpdate' item.id 'category' %}" method="POST" enctype="multipart/form-data" onSubmit="return check3()">
+                    {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+                    {{ form.title }}
+                    <button type="submit" name="submit">Update</button>
+                </form>
+            </li>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
+
+
+<!-- Script -->
+{% block js %}
+    <script>
+        function check1(){
+            if(document.form1.title.value==""){
+                alert("Input the content name.");
+                return false;
+            }
+            else if(window.confirm('Do you register this content?')){ // 確認ダイアログを表示
+                return true;
+            }
+            else{ // 「キャンセル」時の処理
+                return false;
+            }
+        }
+
+        function check2(){
+            if(window.confirm('Do you delete this content?')){ // 確認ダイアログを表示
+                return true;
+            }
+            else{ // 「キャンセル」時の処理
+                return false;
+            }
+        }
+
+        function check3(){
+            if(window.confirm('Do you update this content?')){ // 確認ダイアログを表示
+                return true;
+            }
+            else{ // 「キャンセル」時の処理
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

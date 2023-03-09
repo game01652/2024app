@@ -1,0 +1,36 @@
+﻿<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}login{% endblock %}
+
+{% block css %}
+<!-- Style -->
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:login' %}"><p class="headline">LOGIN</p></a>
+
+<div class="content"> 
+    <form class="login" method="post">
+        <!--エラー内容の表示-->
+        {% if error %}
+        {{ error }}
+        {% endif %}
+
+        {% csrf_token %}
+        <ul>
+            <li><span class="index">USERNAME</span><p>{{ form.username }}</p></li>
+            <li><span class="index">PASSWORD</span><p>{{ form.password }}</p></li>
+        </ul>
+        <!-- ログインボタン -->
+        <button type="submit" class="button">Login</button>
+    </form>
+</div>
+{% endblock %}
+

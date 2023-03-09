@@ -1,0 +1,99 @@
+﻿/* 検索フィールド */
+.content {
+    font-size: 20px;
+    justify-content: center;
+    width: 100%;
+    z-index: 100;    /* 最前面に表示 */
+    display: flex;
+    margin : 230px 0px 200px 0px;    /* 周りの余白（順に上、右、下、左） */
+}
+
+.search_item{
+    font-size: 20px;
+    text-align: center;
+    width: 20%;
+    height:200px;
+    z-index: 100;    /* 最前面に表示 */
+    margin : 0px 100px 0px 0px;    /* 周りの余白（順に上、右、下、左） */
+    display: flex;
+    flex-flow: column;
+    background-color: rgb(210, 220, 223);
+}
+
+/* ヘッドライン */
+.headline {
+    color: rgb(187, 87, 87);    /* 文字色 */
+    text-shadow:0 5px 5px black;    /* 文字の影 */
+    font-weight: bold;    /* 文字の太さ */
+    font-size: 40px;    /* 文字の大きさ */
+    text-align: center;    /* 中央揃え */
+    position: absolute;    /* 絶対配置 */
+    top: 0.1%;    /* 上からの位置 */
+    left: 50%;    /* 左からの位置 */
+    transform: translate(-50%, -50%);    /* 水平方向や垂直方向で再配置 */
+    z-index: 1;    /* 最前面に表示 */
+}
+
+/* 検索フィールド */
+.content-list {
+    width: 45%;
+    display: flex;
+    flex-flow: column;
+    background-color: rgb(210, 220, 223);
+    text-align: center;    /* 中央揃え */
+}
+
+/* 検索項目 */
+.index{
+    font-weight: bold;    /* 文字の太さ */
+    font-size: 15px;    /* 文字の大きさ */
+    color:red;    /* 文字の色 */
+}
+
+
+
+ul {
+    padding: 0 0.5em;
+    position: relative;
+}
+
+ul li {
+    line-height: 1.5;
+    padding: 0.5em 0 0.5em 0.5em;
+    border-bottom: dashed 2px white;
+}
+
+ul li p {
+    padding-left: 20px
+}
+
+
+/* 検索フォーム */
+.single{
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 50%;
+    height: 30px;
+}
+
+.single:focus {
+    background-color: hsl(73, 56%, 88%); /*--背景色--*/
+    outline: none;           /* ※ブラウザが標準で付加する線を消したいとき */
+}
+
+.gnavi__list2 {
+    width: 100%;
+    height: 30%;
+    border: 1px solid #f0f2f4;
+    display: flex;
+}
+
+.gnavi__list2 span {
+    width:50%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}

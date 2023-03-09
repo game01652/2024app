@@ -1,0 +1,70 @@
+﻿<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}New Book Register{% endblock %}
+
+<!-- Style -->
+{% block css %}
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/newBookDetail.css' %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:newBook' %}"><p class="headline">CREATE BOOK</p></a>
+
+
+<!-- 書籍の詳細情報 -->
+<div class="content">
+    <div class="newBook">
+        <!-- 書籍の表紙画像 -->
+        {% load static %}
+        <div class="card-img"><img src="{% static 'image/bookCover.png' %}" id="preview" alt=""></div>
+
+        <!-- 書籍の全項目 -->
+        <div class="card-text">
+            <form name="form1" action="{% url 'BookApp:newBook' %}" method="POST" enctype="multipart/form-data" onSubmit="return check()">
+                {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+                <ul>
+                    <li><span class="index">IMAGE</span><p>{{ form.bookCover }}</p></li>
+                    <li><span class="index">TITLE</span><p>{{ form.title }}</p></li>
+                    <li><span class="index">AUTHOR</span><p>{{ form.author }}</p></li>
+                    <li><span class="index">PUBLISHEDDATE</span><p>{{ form.publishedDate }}</p></li>
+                    <li><span class="index">DESCRIPTION</span><p>{{ form.description }}</p></li>
+                    <li><span class="index">ISBN</span><p>{{ form.isbn }}</p></li>
+                    <li><span class="index">PAGE</span><p>{{ form.page }}</p></li>
+                    <li><span class="index">IMPRESSION</span><p>{{ form.impression }}</p></li>
+                    <li><span class="index">REVIEW</span><p>{{ form.review }}</p></li>
+                    <li><span class="index">CATEGORY</span><a href="{% url 'BookApp:contentCreate' 'stage-create' %}" target="_blank">Create Category</a><p><label class="selectbox-001">{{ form.category }}</label></p></li>
+                    <li><span class="index">LANGUAGE</span><a href="{% url 'BookApp:contentCreate' 'language-create' %}" target="_blank">Create Language</a><p><label class="selectbox-001">{{ form.language }}</label></p></li>
+                    <li><span class="index">STAGE</span><a href="{% url 'BookApp:contentCreate' 'category-create' %}" target="_blank">Create Stage</a><p><label class="selectbox-001">{{ form.stage }}</label></p></li>
+                    <input type="hidden" name="user" value="{{ user.id }}">
+                </ul>            
+                <!-- 登録ボタン -->
+                <button type="submit" name="submit" class="button">Register</button>
+            </form>
+        </div>
+</div>
+</div>
+{% endblock %}
+
+
+<!-- Script -->
+{% block js %}
+    <!-- JavaScriptファイルの読み込み -->
+    {% load static %}
+    <script src="{% static 'js/bookCover.js' %}"></script>
+    <script>
+        function check(){
+            if(window.confirm('DO you register this book?')){ // 確認ダイアログを表示
+                return true;
+            }
+            else{ // 「キャンセル」時の処理
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

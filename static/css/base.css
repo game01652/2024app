@@ -1,0 +1,109 @@
+﻿/* 背景写真の引用元 */
+.image_url {
+    position: absolute;    /* 絶対配置 */
+    bottom: 0;    /* 下寄せ */
+    right: 0;    /* 右寄せ */
+    position: fixed;    /* 文字の固定 */
+}
+
+/* トップページ（書籍検索画面）へのリンク */
+.back_top {
+    color: white;    /* 文字の色 */
+    text-shadow:0 5px 5px black;    /* 文字の影 */
+    font-size: 25px;    /* 文字の大きさ */
+    font-weight: bold;    /* 文字のフォント */
+}
+
+/* トップページ（書籍検索画面）へのリンク */
+.link {
+    position: fixed;    /* 文字の固定 */
+    margin : 40px 0px 0px 20px;    /* 周りの余白（順に上、右、下、左） */
+}
+
+.str {
+    font-size: 20px;    /* 文字の大きさ */
+    font-weight: bold;    /* 文字のフォント */
+    color: white;    /* 文字の色 */
+}
+
+
+
+/* トップダウンメニュー */
+.gnavi__wrap {
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    z-index: 100;    /* 最前面に表示 */
+    display: flex;
+    margin : 0px 0px 0px 0px;    /* 周りの余白（順に上、右、下、左） */
+    position: absolute;    /* 絶対配置 */
+    top: 10%;    /* 上からの位置 */
+}
+
+.gnavi__list {
+    width: 20%;
+    height: 45px;
+    background-color: #76abd1;
+    border: 1px solid #f0f2f4;
+}
+
+.gnavi__list a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.gnavi__list:hover {
+    background-color: #0071BB;
+}
+
+html, body{
+    margin : 0px 0px 0px 0px;    /* 周りの余白（順に上、右、下、左） */
+}
+
+
+
+
+.dropdown__lists {
+    transform: scaleY(0);/*デフォルトでは非表示の状態にしておく*/
+    width: 100%;
+}
+.gnavi__list:hover .dropdown__lists {
+    transform: scaleY(1);/*Gナビメニューにホバーしたら表示*/
+}
+.dropdown__list {
+    background-color: #24ef28;
+    height: 60px;
+    border: 1px solid #f0f2f4;
+}
+
+.dropdown__list:hover {
+    background-color: #db5454;
+}
+.dropdown__list a {
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+ }
+
+
+#footer {
+    border-top: solid 1px rgb(136, 107, 107);
+    padding-bottom: 10px;
+    background-color: #76abd1;    /* 背景色 */
+}
+
+#footer p {
+    text-align: center;
+}

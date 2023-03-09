@@ -1,0 +1,150 @@
+﻿<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}Book List{% endblock %}
+
+<!-- Style -->
+{% block css %}
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bookList.css' %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:bookList' %}"><p class="headline">BOOK LIST</p></a>
+
+
+<div class="all-content">
+    <!-- 検索欄 -->
+    <form class="search_item" name="form1" action="{% url 'BookApp:bookList' %}" method="POST" class="search_form" onsubmit="return check()">
+        <!-- 書籍の検索ヒット数 -->
+        {% if total == 0 %}    <!-- 検索にヒットした書籍が存在しない場合 -->
+        <p>検索条件にヒットする書籍はありません</p>
+        {% else %}    <!-- ヒットした書籍が1冊以上ある場合 -->
+        <p>{{ total }}件の書籍がヒットしました</p>
+        {% endif %}
+    
+        <p style="text-align: center;">【検索内容】</p>
+        {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+        <!-- 検索のためのテキスト入力エリア -->
+        <div class="gnavi__list2"><span class="index">TITLE</span>{{ form.title }}</div>
+        <div class="gnavi__list2"><span class="index">AUTHOR</span>{{ form.author }}</div>
+        <div class="gnavi__list2"><span class="index">ISBN</span>{{ form.isbn }}</div>
+            
+        <!-- 検索ボタン -->
+        <button type="submit" name="submit" class="button">Search</button>
+    </form>
+
+    <!-- 書籍欄 -->
+    <div class="all-book">
+        {% for item in obj %}
+        <!-- 通常ウィンドウ -->
+        <div class = "content">
+            <!-- 書籍の表紙画像 -->
+            {% if not item.bookCover %}    <!-- 書籍情報に表紙画像がない場合 -->
+            <!-- static内の表紙画像 -->
+            {% load static %}
+            <div class="card-img"><img src="{% static 'image/bookCover.png' %}" alt=""></div>
+            {% else %}    <!-- 表紙画像が格納されている場合 -->
+            <div class="card-img"><img src="{{ item.bookCover }}" alt=""></div>
+            {% endif %}
+
+            <div class="card-text">
+                <div class="modal-toggle btn-example" data-modal={{item.id}}><a class="link_detail" href="#"><p class="shortcut-1">{{ item.title }}</p></a></div>
+
+                <p class="shortcut-1">{{ item.author }}</p>
+                <p class="shortcut-mult">{{ item.description }}</p>
+            </div>
+
+            <div>
+                <!-- 登録ボタン -->
+                <form name="form1" action="{% url 'BookApp:bookDetail' 1 %}" method="POST" class="search_form" enctype="multipart/form-data">
+                    {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+                    <input type="text" name="param-title" value="{{ item.title }}" hidden>
+                    <input type="text" name="param-author" value="{{ item.author }}" hidden>
+                    <input type="text" name="param-publishedDate" value="{{ item.publishedDate }}" hidden>
+                    <input type="text" name="param-description" value="{{ item.description }}" hidden>
+                    <input type="text" name="param-isbn" value="{{ item.isbn }}" hidden>
+                    <input type="text" name="param-page" value="{{ item.category }}" hidden>
+                    <input type="text" name="param-language" value="{{ item.language }}" hidden>
+                    <input type="text" name="param-image" value="{{ item.bookCover }}" hidden>
+
+                    <!-- 登録ボタン -->
+                    <button type="submit" name="submit" class="button">REGISTER</button>
+                </form>
+            </div>
+        </div>
+    
+        <!-- モーダルウィンドウ -->
+        <div id={{item.id}} class="modal">
+            <div class="modal-content">
+                <!-- ×ボタン -->
+                <div class="modal-top">
+                    <span class="modal-close">×</span>
+                </div>
+
+                <!-- 書籍の表紙画像 -->
+                {% if not item.bookCover %}    <!-- 書籍情報に表紙画像がない場合 -->
+                <!-- static内の表紙画像 -->
+                {% load static %}
+                <div class="card-img"><img src="{% static 'image/bookCover.png' %}" alt=""></div>
+                {% else %}    <!-- 表紙画像が格納されている場合 -->
+                <div class="card-img"><img src="{{ item.bookCover }}" alt=""></div>
+                {% endif %}
+            
+                <!-- 書籍の全項目 -->
+                <div class="modal-card-text">
+                    <ul>
+                        <li><span class="index">TITLE</span><p>{{ item.title }}</p></li>
+                        <li><span class="index">AUTHOR</span><p>{{ item.author }}</p></li>
+                        <li><span class="index">PUBLISHEDDATE</span><p>{{ item.publishedDate }}</p></li>
+                        <li><span class="index">DESCRIPTION</span><p>{{ item.description }}</p></li>
+                        <li><span class="index">ISBN</span><p>{{ item.isbn }}</p></li>
+                        <li><span class="index">PAGE</span><p>{{ item.page }}  Page</p></li>
+                        <li><span class="index">CATEGORY</span><p>{{ item.category }}</p></li>
+                        <li><span class="index">LANGUAGE</span><p>{{ item.language }}</p></li>
+                    </ul>
+
+                    <!-- 書籍の詳細情報を別のタグで開くためのリンク -->
+                    <form name="form1" action="{% url 'BookApp:bookDetail' 1 %}" method="POST" class="search_form" enctype="multipart/form-data">
+                        {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+                        <input type="text" name="param-title" value="{{ item.title }}" hidden>
+                        <input type="text" name="param-author" value="{{ item.author }}" hidden>
+                        <input type="text" name="param-publishedDate" value="{{ item.publishedDate }}" hidden>
+                        <input type="text" name="param-description" value="{{ item.description }}" hidden>
+                        <input type="text" name="param-isbn" value="{{ item.isbn }}" hidden>
+                        <input type="text" name="param-page" value="{{ item.category }}" hidden>
+                        <input type="text" name="param-language" value="{{ item.language }}" hidden>
+                        <input type="text" name="param-image" value="{{ item.bookCover }}" hidden>
+
+                        <!-- 登録ボタン -->
+                        <button type="submit" name="submit" class="button">REGISTER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}
+
+
+<!-- Script -->
+{% block js %}
+    <!-- JavaScriptファイルの読み込み -->
+    {% load static %}
+    <script src="{% static 'js/modal.js' %}"></script>
+    <script>
+        function check(){
+            if((document.form1.title.value=="") && (document.form1.author.value=="") && (document.form1.isbn.value=="")){
+                alert("Please input the text.");
+                return false;
+            }
+            return true;
+        }
+        </script>
+{% endblock %}

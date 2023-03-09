@@ -1,0 +1,47 @@
+<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}User Information{% endblock %}
+
+{% block css %}
+<!-- Style -->
+<!-- CSSファイルの読み込み -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/userInformation.css' %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:userInformation' %}"><p class="headline">USER INFORMATION</p></a>
+
+
+<div class="content">
+    <form class="user" name="form" action="{% url 'BookApp:userUpdate' %}" method="POST" enctype="multipart/form-data" onSubmit="return check()">
+        {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+        <ul>
+            <li><span class="index">Username<p>{{ form.username }}</p></li>
+            <li><span class="index">Email<p>{{ form.email }}</p></li>
+            <li><span class="index">Firstname<p>{{ form.first_name }}</p><li> 
+            <li><span class="index">Lastname<p>{{ form.last_name }}</p><li>
+        </ul>
+        <button type="submit" name="submit" class="button">Update</button>
+    </form>
+</div>
+{% endblock %}
+
+
+<!-- Script -->
+{% block js %}
+    <script>
+        function check(){
+            if(window.confirm('Do you update your information')){ // 確認ダイアログを表示
+                return true;
+            }
+            else{ // 「キャンセル」時の処理
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

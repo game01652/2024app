@@ -1,0 +1,50 @@
+﻿<!-- Copyright 2022 Kokai Sakaguchi -->
+<!-- APIでの書籍検索のテンプレート -->
+
+<!-- テンプレートファイルの継承 -->
+{% extends "base.html" %}
+
+<!-- Title -->
+{% block title %}Book Search{% endblock %}
+
+<!-- Style -->
+{% block css %}
+<!--CSSファイルの読み込み-->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/bookSearch.css' %}" />
+{% endblock %}
+
+<!-- Body -->
+{% block content %}
+<!-- ヘッドライン -->
+<a href="{% url 'BookApp:bookSearch' %}"><p class="headline">Book Search</p></a>
+
+<!-- 検索フィールド -->
+<div class="content">
+    <!-- 検索フォーム -->
+    <form class="search" name="form1" action="{% url 'BookApp:bookList' %}" method="POST" onsubmit="return check()">
+        {% csrf_token %}    <!-- CSRF(クロスサイト・リクエスト・フォージェリ)対策 -->
+        <ul>
+            <li><span class="index">TITLE</span><p>{{ form.title }}</p></li>
+            <li><span class="index">AUTHOR</span><p>{{ form.author }}</p></li>
+            <li><span class="index">ISBN</span><p>{{ form.isbn }}</p></li>
+        </ul>
+        <!-- 検索ボタン -->
+        <button type="submit" name="submit">Search</button>
+    </form>
+</div>
+{% endblock %}
+
+
+<!-- Script -->
+{% block js %}
+    <script>
+    function check(){
+        if((document.form1.title.value=="") && (document.form1.author.value=="") && (document.form1.isbn.value=="")){
+            alert("Please input the text.");
+            return false;
+        }
+        return true;
+    }
+    </script>
+{% endblock %}
